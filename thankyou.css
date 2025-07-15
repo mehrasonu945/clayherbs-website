@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4fff8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.thankyou-wrapper {
+  text-align: center;
+}
+
+.thankyou-card {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  max-width: 400px;
+  margin: auto;
+}
+
+.thankyou-card h1 {
+  color: #2b7a78;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.thankyou-card p {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #2b7a78;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  background-color: #205f5f;
+}

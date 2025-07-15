@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f7fdfc;
+  color: #333;
+}
+.dashboard-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 40px 20px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+header h2 {
+  color: #2b7a78;
+}
+header button {
+  padding: 10px 16px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.orders-list .order-card {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 6px solid #2b7a78;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.order-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.order-card ul {
+  padding-left: 18px;
+  margin-top: 10px;
+}
+.back-link {
+  display: inline-block;
+  margin-top: 30px;
+  color: #2b7a78;
+  text-decoration: none;
+  font-weight: bold;
+}

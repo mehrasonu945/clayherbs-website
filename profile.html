@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Profile – Clayberbs</title>
+  <link rel="stylesheet" href="css/profile.css" />
+</head>
+<body>
+  <div class="profile-container">
+    <h2>My Profile</h2>
+    <form id="profileForm" onsubmit="saveProfile(event)">
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Enter your full name" required />
+
+      <label>Email (readonly)</label>
+      <input type="email" id="email" readonly />
+
+      <label>Phone Number</label>
+      <input type="text" id="phone" placeholder="e.g. 9876543210" />
+
+      <label>Shipping Address</label>
+      <textarea id="address" rows="4" placeholder="Enter your full address" required></textarea>
+
+      <button type="submit">Save Changes</button>
+    </form>
+    <a class="back" href="myorders.html">← Back to Dashboard</a>
+  </div>
+
+  <script>
+    const email = localStorage.getItem("loggedInUser");
+    if (!email) {
+      alert("Please login first.");
+      window.location.href = "login.html";
+    }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const index = users.findIndex(u => u.email === email);
+    const user = users[index];
+    const form = document.getElementById("profileForm");
+
+    // Load profile
+    window.onload = function () {
+      if (user.profile) {
+        document.getElementById("name").value = user.profile.name || "";
+        document.getElementById("phone").value = user.profile.phone || "";
+        document.getElementById("address").value = user.profile.address || "";
+      }
+      document.getElementById("email").value = email;
+    };
+
+    function saveProfile(e) {
+      e.preventDefault();
+      const profile = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        address: document.getElementById("address").value
+      };
+      users[index].profile = profile;
+      localStorage.setItem("users", JSON.stringify(users));
+      alert("Profile updated!");
+    }
+  </script>
+</body>
+</html>

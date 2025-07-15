@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout – Clayberbs</title>
+  <link rel="stylesheet" href="css/checkout.css" />
+</head>
+<body>
+  <div class="checkout-container">
+    <h2>Checkout</h2>
+
+    <div class="checkout-flex">
+      <!-- Left: Cart -->
+      <div class="cart-summary">
+        <h3>Your Cart</h3>
+        <div id="cart-items"></div>
+        <div class="total">Total: ₹<span id="total-price">0</span></div>
+      </div>
+
+      <!-- Right: Form -->
+      <form id="orderForm" onsubmit="placeOrder(event)">
+        <h3>Shipping Details</h3>
+        <input type="text" id="name" placeholder="Full Name" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="text" id="phone" placeholder="Phone Number" required />
+        <textarea id="address" placeholder="Shipping Address" rows="4" required></textarea>
+        <button type="submit">Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartItemsEl = document.getElementById("cart-items");
+    const totalEl = document.getElementById("total-price");
+    let total = 0;
+
+    if (cart.length === 0) {
+      cartItemsEl.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+      cart.forEach(item => {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+        cartItemsEl.innerHTML += `
+          <div class="item">
+            <p><strong>${item.name}</strong> × ${item.qty}</p>
+            <p>₹${subtotal}</p>
+          </div>
+        `;
+      });
+    }
+    totalEl.textContent = total;
+
+    function placeOrder(e) {
+      e.preventDefault();
+
+      const order = {
+        id: Date.now(),
+        date: new Date().toLocaleDateString(),
+        total,
+        items: cart,
+        customer: {
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          phone: document.getElementById("phone").value,
+          address: document.getElementById("address").value,
+        }
+      };
+
+      // Optionally save to localStorage for user
+      const email = localStorage.getItem("loggedInUser");
+      if (email) {
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        const index = users.findIndex(u => u.email === email);
+        if (index > -1) {
+          users[index].orders = users[index].orders || [];
+          users[index].orders.push(order);
+          localStorage.setItem("users", JSON.stringify(users));
+        }
+      }
+
+      localStorage.removeItem("cart");
+      alert("Order placed successfully!");
+      window.location.href = "thankyou.html";
+    }
+  </script>
+</body>
+</html>

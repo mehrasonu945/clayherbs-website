@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f2fdfc;
+  color: #333;
+}
+
+.checkout-container {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2b7a78;
+}
+
+.checkout-flex {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.cart-summary, form {
+  flex: 1;
+  min-width: 300px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.cart-summary h3,
+form h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed #ccc;
+}
+
+.total {
+  text-align: right;
+  font-size: 1.2rem;
+  margin-top: 15px;
+  color: #27ae60;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+form button {
+  width: 100%;
+  padding: 12px;
+  background: #2b7a78;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+form button:hover {
+  background: #205f5f;
+}

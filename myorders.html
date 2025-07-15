@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Orders – Clayberbs</title>
+  <link rel="stylesheet" href="css/myorders.css" />
+</head>
+<body>
+  <div class="dashboard-container">
+    <header>
+      <h2>My Orders</h2>
+      <button onclick="logout()">Logout</button>
+    </header>
+
+    <div id="orders-list" class="orders-list">
+      <!-- Orders will be inserted here -->
+    </div>
+
+    <a href="index.html" class="back-link">← Back to Home</a>
+  </div>
+
+  <script>
+    const email = localStorage.getItem("loggedInUser");
+    if (!email) {
+      alert("Please login to view your orders.");
+      window.location.href = "login.html";
+    }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(u => u.email === email);
+    const orderList = document.getElementById("orders-list");
+
+    if (!user || !user.orders || user.orders.length === 0) {
+      orderList.innerHTML = "<p>No orders found.</p>";
+    } else {
+      user.orders.forEach(order => {
+        const itemHtml = order.items.map(i => `<li>${i.name} × ${i.qty}</li>`).join("");
+        orderList.innerHTML += `
+          <div class="order-card">
+            <h3>Order #${order.id}</h3>
+            <p><strong>Date:</strong> ${order.date}</p>
+            <p><strong>Total:</strong> ₹${order.total}</p>
+            <ul>${itemHtml}</ul>
+          </div>
+        `;
+      });
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
